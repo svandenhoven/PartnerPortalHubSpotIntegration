@@ -1,0 +1,201 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "outputs": {},
+  "parameters": {
+    "logicAppName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "metadata": {
+        "description": "Name or the Logic App."
+      }
+    },
+    "HubSpotAPIKey": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "metadata": {
+        "description": "API key from HutSpot."
+      }
+    },
+    "logicAppLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "allowedValues": [
+        "[resourceGroup().location]",
+        "australiaeast",
+        "australiasoutheast",
+        "brazilsouth",
+        "centralus",
+        "eastasia",
+        "eastus",
+        "eastus2",
+        "japaneast",
+        "japanwest",
+        "northcentralus",
+        "northeurope",
+        "southcentralus",
+        "southeastasia",
+        "westeurope",
+        "westus"
+      ],
+      "metadata": {
+        "description": "Location of the Logic App."
+      }
+    }
+  },
+  "resources": [
+    {
+      "name": "[parameters('logicAppName')]",
+      "type": "Microsoft.Logic/workflows",
+      "location": "[parameters('logicAppLocation')]",
+      "tags": {
+        "displayName": "LogicApp"
+      },
+      "apiVersion": "2016-06-01",
+      "properties": {
+        "definition": {
+          "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+          "actions": {
+            "HTTP": {
+              "inputs": {
+                "body": {
+                  "properties": [
+                    {
+                      "property": "firstname",
+                      "value": "@{triggerBody()?['UserDetails']?['FirstName']}"
+                    },
+                    {
+                      "property": "lastname",
+                      "value": "@{triggerBody()?['UserDetails']?['LastName']}"
+                    },
+                    {
+                      "property": "website",
+                      "value": "http://cloudpartner.azure.com"
+                    },
+                    {
+                      "property": "company",
+                      "value": "@{triggerBody()?['UserDetails']?['Company']}"
+                    },
+                    {
+                      "property": "hs_lead_status",
+                      "value": "NEW"
+                    },
+                    {
+                      "property": "phone",
+                      "value": "@{triggerBody()?['UserDetails']?['Phone']}"
+                    },
+                    {
+                      "property": "email",
+                      "value": "@{triggerBody()?['UserDetails']?['Email']}"
+                    },
+                    {
+                      "property": "address",
+                      "value": ""
+                    },
+                    {
+                      "property": "city",
+                      "value": ""
+                    },
+                    {
+                      "property": "state",
+                      "value": ""
+                    },
+                    {
+                      "property": "zip",
+                      "value": ""
+                    }
+                  ]
+                },
+                "method": "POST",
+                "uri": "[concat('https://api.hubapi.com/contacts/v1/contact/?hapikey=',parameters('HubSpotAPIKey'))]"
+              },
+              "runAfter": {},
+              "type": "Http"
+            },
+            "Response": {
+              "inputs": {
+                "body": "thnx for the lead from @{triggerBody()?['UserDetails']?['Company']}",
+                "statusCode": 200
+              },
+              "kind": "Http",
+              "runAfter": {
+                "HTTP": [
+                  "Succeeded"
+                ]
+              },
+              "type": "Response"
+            }
+          },
+          "contentVersion": "1.0.0.0",
+          "outputs": {},
+          "parameters": {},
+          "triggers": {
+            "manual": {
+              "inputs": {
+                "schema": {
+                  "$schema": "http://json-schema.org/draft-04/schema#",
+                  "definitions": {},
+                  "id": "http://example.com/example.json",
+                  "properties": {
+                    "ActionCode": {
+                      "id": "/properties/ActionCode",
+                      "type": "string"
+                    },
+                    "LeadSource": {
+                      "id": "/properties/LeadSource",
+                      "type": "string"
+                    },
+                    "OfferTitle": {
+                      "id": "/properties/OfferTitle",
+                      "type": "string"
+                    },
+                    "UserDetails": {
+                      "id": "/properties/UserDetails",
+                      "properties": {
+                        "Company": {
+                          "id": "/properties/UserDetails/properties/Company",
+                          "type": "string"
+                        },
+                        "Country": {
+                          "id": "/properties/UserDetails/properties/Country",
+                          "type": "string"
+                        },
+                        "Email": {
+                          "id": "/properties/UserDetails/properties/Email",
+                          "type": "string"
+                        },
+                        "FirstName": {
+                          "id": "/properties/UserDetails/properties/FirstName",
+                          "type": "string"
+                        },
+                        "LastName": {
+                          "id": "/properties/UserDetails/properties/LastName",
+                          "type": "string"
+                        },
+                        "Phone": {
+                          "id": "/properties/UserDetails/properties/Phone",
+                          "type": "string"
+                        },
+                        "Title": {
+                          "id": "/properties/UserDetails/properties/Title",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "kind": "Http",
+              "type": "Request"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "variables": {}
+}

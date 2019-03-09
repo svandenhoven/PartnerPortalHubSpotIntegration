@@ -1,5 +1,6 @@
-# PartnerPortalHubSpotIntegration
-Integration between Microsoft PartnerPortal and HubSpot
+# PartnerPortal HubSpot Integration
+This ARM template will add a Logic App to your Azure Subscription to create a integration between Microsoft PartnerPortal and HubSpot when a new lead is created in partner portal when a potential customer fills in the
+Contact Me Form.
 
 Creates a solution to add a lead from partnerportal.azure.com to HubSpot.
 

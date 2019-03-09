@@ -15,6 +15,13 @@ To add the Logic App to your Azure subscription click below link:
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
+Enter the information including the HubSpot API key in the Azure Deployment Form
+
+<p align="center">
+  <img src="azureportal.jpg" width="450" title="hover text">
+</p>
+
+
 After deployment go to the edit blade of the logic app and copy the url of the Request Trigger Action. Use this URL in the https://partnerportal.azure.com Lead Configuration as HTTPS endpoint.
 <p align="center">
   <img src="httprequest.png" width="350" title="hover text">

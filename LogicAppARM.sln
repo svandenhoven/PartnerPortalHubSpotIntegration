@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{79C11100-A022-4583-8A03-37F46AE62578}"
 	ProjectSection(SolutionItems) = preProject
 		httprequest.png = httprequest.png
+		hubspotapikey.jpg = hubspotapikey.jpg
 		README.md = README.md
 	EndProjectSection
 EndProject

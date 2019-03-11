@@ -1,13 +1,10 @@
-# PartnerPortal HubSpot Integration
-This ARM template will add a Logic App to your Azure Subscription to create a integration between Microsoft PartnerPortal and HubSpot when a new lead is created in partner portal when a potential customer fills in the
-Contact Me Form.
+# Cloud Partner Portal - HubSpot Integration
 
-Creates a solution to add a lead from partnerportal.azure.com to HubSpot.
+This ARM template will add a Logic App to your Azure Subscription to create a integration between Microsoft Cloud Partner Portal and HubSpot. 
 
-An APIKEY from HubSpot is required.
-<p align="center">
-  <img src="hubspotapikey.jpg" width="350" title="hover text">
-</p>
+When a new goes trough the 'Contact Me' form in the Azure Marketplace or Microsoft AppSource the data has to be handled by a HTTP Endpoint. 
+This example shows how to build this endpoint to process the data from the 'Contact Me' form via a Logic App. 
+This implemention uses HubSpot as an example backend but using a logic app, you could do anything from sending an email to creating a record in a SQL Database.
 
 To add the Logic App to your Azure subscription click below link:
 
@@ -15,14 +12,17 @@ To add the Logic App to your Azure subscription click below link:
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
+An Api-Key from HubSpot is required for this example to work end to end. You can get this Api Key via the HubSpot settings:
+
+[![hubspotapikey](images/hubspotapikey_thumb.jpg "hubspotapikey")](images/hubspotapikey.jpg)
+ 
 Enter the information including the HubSpot API key in the Azure Deployment Form
 
-<p align="center">
-  <img src="azureportal.jpg" width="450" title="hover text">
-</p>
+[![azureportal](images/azureportal_thumb.jpg "azureportal")](images/azureportal.jpg)
 
+After deployment go to the edit blade of the logic app and copy the url of the Request Trigger Action, in the grey box: 
 
-After deployment go to the edit blade of the logic app and copy the url of the Request Trigger Action. Use this URL in the https://partnerportal.azure.com Lead Configuration as HTTPS endpoint.
-<p align="center">
-  <img src="httprequest.png" width="350" title="hover text">
-</p>
+[![httprequest](images/httprequest_thumb.jpg "httprequest")](images/httprequest.jpg) 
+
+Use this URL in the Lead Configuration section of the 'Cloud Partner Portal' as HTTPS endpoint.
+ 

@@ -22,7 +22,7 @@ Enter the information including the HubSpot API key in the Azure Deployment Form
 </p>
 
 
-After deployment go to the edit blade of the logic app and copy the url of the Request Trigger Action. Use this URL in the https://partnerportal.azure.com Lead Configuration as HTTPS endpoint.
+After deployment go to the edit blade of the logic app and copy the url of the Request Trigger Action. Use this URL in the https://partner.microsoft.com/en-us/dashboard Lead Configuration as HTTPS endpoint.
 <p align="center">
   <img src="httprequest.png" width="350" title="hover text">
 </p>
